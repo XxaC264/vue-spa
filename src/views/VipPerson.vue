@@ -15,7 +15,7 @@
           <td>{{ i.name }}</td>
           <td>{{ i.city }}</td>
           <td>{{ i.address }}</td>
-          <td><button @click="fn(index)">移除会员</button></td>
+          <td><button @click="fn(index, i)">移除会员</button></td>
         </tr>
       </table>
     </div>
@@ -26,8 +26,8 @@
 export default {
   name: "VipPerson",
   methods: {
-    fn(index) {
-      let r = confirm("确定删除吗");
+    fn(index, i) {
+      let r = confirm(`确定删除"${i.name}"吗`);
       if (r == true) {
         this.$store.state.tableList.splice(index, 1);
       }
