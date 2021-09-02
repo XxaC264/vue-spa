@@ -12,11 +12,29 @@ export default {
   name: "NavHeader",
   methods: {
     cancellation() {
-      let r = confirm("确定注销吗!");
-      if (r == true) {
-        this.$router.replace("/");
-        localStorage.clear();
-      }
+
+      this.$confirm(' 是否退出登录', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.$router.replace("/");
+          localStorage.clear();
+          this.$message({
+            type: 'success',
+            message: '已退出!'
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消'
+          });          
+        });
+      // let r = confirm("确定注销吗!");
+      // if (r == true) {
+      //   this.$router.replace("/");
+      //   localStorage.clear();
+      // }
     },
   },
 };

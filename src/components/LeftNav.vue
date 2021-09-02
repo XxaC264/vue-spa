@@ -7,7 +7,7 @@
     />
     <ul>
       <li>
-        <router-link to="/home/person-info">人员管理</router-link>
+        <router-link to="/home/person-info">人员信息</router-link>
       </li>
       <li>
         <keep-alive>

@@ -15,7 +15,7 @@
           <td>{{ i.name }}</td>
           <td>{{ i.city }}</td>
           <td>{{ i.address }}</td>
-          <td><button @click="fn(index, i)">移除会员</button></td>
+          <td><el-button type="text" @click="fn(index, i)">移除会员</el-button></td>
         </tr>
       </table>
     </div>
@@ -27,10 +27,27 @@ export default {
   name: "VipPerson",
   methods: {
     fn(index, i) {
-      let r = confirm(`确定删除"${i.name}"吗`);
-      if (r == true) {
-        this.$store.state.tableList.splice(index, 1);
-      }
+      this.$confirm(`是否移除会员"${i.name}" ?`, "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      }).then(() => {
+          this.$store.state.tableList.splice(index, 1);
+          this.$message({
+            title: "成功",
+            message: `已删除${i.name}!`,
+            type: "success",
+          });
+        }).catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消删除",
+          });
+        });
+      // let r = confirm(`确定删除"${i.name}"吗`);
+      // if (r == true) {
+      //   this.$store.state.tableList.splice(index, 1);
+      // }
     },
   },
 };
@@ -41,7 +58,6 @@ export default {
   height: 868px;
   overflow: scroll;
   overflow-x: hidden;
-
 }
 table {
   text-align: center;
@@ -63,6 +79,6 @@ tr {
   border-bottom: 2px solid #eee;
 }
 tr:hover {
-  background-color: rgb(245,247,250);
+  background-color: rgb(245, 247, 250);
 }
 </style>

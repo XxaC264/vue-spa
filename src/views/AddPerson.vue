@@ -105,19 +105,19 @@ export default {
     add() {
       // 判断输入是否为空
       if (this.personDate === "" || this.personDate === undefined) {
-        alert("请输入创建时间");
+        this.$message.error('创建时间不能为空');
         return;
       } else if (this.personName === "" || this.personName === undefined) {
-        alert("姓名不能为空");
+        this.$message.error('人员姓名不能为空');
         return;
       } else if (this.personCity === "" || this.personCity === undefined) {
-        alert("城市不能为空");
+        this.$message.error('人员省份不能为空');
         return;
       } else if (
         this.personAddress === "" ||
         this.personAddress === undefined
       ) {
-        alert("地址不能为空");
+        this.$message.error('人员地址不能为空');
         return;
       }
       // 添加数据
@@ -130,7 +130,9 @@ export default {
         city: this.personCity,
         address: this.personAddress,
         details: {
-          title: this.$store.state.tableList[this.$store.state.tableList.length-1].name,
+          title:
+            this.$store.state.tableList[this.$store.state.tableList.length - 1]
+              .name,
           gender: this.personDetailsGender,
           weapon: this.personDetailsWeapon,
           skill: this.personDetailsSkill,
@@ -139,6 +141,10 @@ export default {
         },
       });
 
+      this.$message({
+        message: `${this.personName}，添加成功`,
+        type: "success",
+      });
       // 清空输入
       this.personDate = "";
       this.personName = "";
@@ -149,7 +155,6 @@ export default {
       this.personDetailsSkill = "";
       this.personDetailsBirthplace = "";
       this.personDetailsTeacher = "";
-      alert("添加成功");
     },
   },
 };
@@ -179,12 +184,12 @@ li {
   list-style-type: none;
 }
 button {
-  border: rgb(64,158,255) 1px solid;
+  border: rgb(64, 158, 255) 1px solid;
   height: 34px;
   width: 68px;
   border-radius: 8px;
   margin-top: 20px;
-  background-color: rgb(64,158,255);
+  background-color: rgb(64, 158, 255);
   color: white;
 }
 </style>

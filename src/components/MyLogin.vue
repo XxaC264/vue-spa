@@ -4,23 +4,23 @@
     <div class="myLogin">
       <ul>
         <li>
-          <input
-            type="text"
-            placeholder="请输入用户名"
+          <el-input
             v-model.trim="userName"
+            placeholder="请输入内容"
             class="input user-name"
             @keyup.enter="login"
             autofocus
-          />
+            clearable
+          ></el-input>
         </li>
         <li>
-          <input
-            type="password"
+          <el-input
             placeholder="请输入密码"
             v-model.trim="passwd"
-            class="input pass-word"
+            show-password
             @keyup.enter="login"
-          />
+            class="input passwd"
+          ></el-input>
         </li>
       </ul>
       <input type="button" value="登录" @click="login" class="btn login" />
@@ -41,11 +41,16 @@ export default {
   methods: {
     login() {
       if (this.userName === "admin" && this.passwd === "a264567") {
-        localStorage.setItem('UserName', this.userName);
-        localStorage.setItem('PassWord', this.passwd);
+        localStorage.setItem("UserName", this.userName);
+        localStorage.setItem("PassWord", this.passwd);
         this.$router.push("/home");
+        this.$message({
+          message: '登录成功',
+          type: 'success'
+        });
       } else {
-        alert("登录失败");
+        // alert("登录失败");
+        this.$message.error('账号或密码错误');
         localStorage.clear();
       }
       (this.userName = ""), (this.passwd = "");
@@ -75,10 +80,7 @@ ul {
 .input {
   width: 546px;
   height: 28px;
-  margin-top: 10px;
-  padding: 4px 7px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  margin-top: 20px;
 }
 .input:focus {
   outline: none;

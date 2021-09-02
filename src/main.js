@@ -4,6 +4,9 @@ import App from './App.vue'
 import router from '@/router'
 // 导入Vuex模块
 import store from '@/store'
+// 导入ElementUI
+import './plugins/element.js'
+import 'element-ui/lib/theme-chalk/index.css';
 Vue.config.productionTip = false
 
 
